@@ -10,6 +10,6 @@ router.post('/logout',logoutAdmin)
 router.get('/adminHome',getAllUsers)
 
 
-
+ 
 
 export default router;

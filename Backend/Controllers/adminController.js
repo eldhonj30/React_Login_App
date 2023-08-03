@@ -10,7 +10,8 @@ const authAdmin = asyncHandler(async (req, res) => {
   const admin = await Admin.findOne({ email });
 
   if (admin && (await admin.matchPassword(password))) {
-    generateToken(res, admin._id);
+    generateToken(res,admin._id);
+
 
     res.status(201).json({
       _id: admin._id,
@@ -35,7 +36,7 @@ const logoutAdmin = asyncHandler(async (req, res) => {
 const getAllUsers = asyncHandler(async (req,res) => {
   fetchAllUsers()
     .then((users) => {
-      res.status(200).json({users});
+      res.status(200).json({users}); 
     })
     .catch((error) => {
       console.log(error);

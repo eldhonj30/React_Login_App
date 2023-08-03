@@ -2,6 +2,8 @@ import TableComponent from "../../components/Table";
 import React from "react";
 import axios from "axios";
 import { useEffect,useState } from "react"
+import { toast } from "react-toastify";
+import Loader from "../../components/Loader";
 
 
 const AdminHomeScreen = () => {
@@ -13,9 +15,11 @@ const AdminHomeScreen = () => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get("http://localhost:5000/api/admin/adminHome ");
+        
         setUser(response.data.users);
         setLoading(false); 
       } catch (error) {
+        toast.error(error);
         console.error("Error fetching users:", error);
         setLoading(false); 
       }
@@ -27,7 +31,7 @@ const AdminHomeScreen = () => {
   return (
     <div>
       <h1>User Data</h1>
-      <>{loading}</>
+      {loading ? <Loader/> : null}
       <TableComponent users={user} />
     </div>
   );
